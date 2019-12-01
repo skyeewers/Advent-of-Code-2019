@@ -21,38 +21,37 @@ fn main() {
 }
 
 fn solve(raw_input: String) {
-    let moduleFuel = module_requirement(raw_input);
-    let tiranyFuel = rocketEquationFuel(moduleFuel);
-    let result = moduleFuel + tiranyFuel;
-
-    println!("Dry parts require {} of fuel", moduleFuel);
-    println!("An additional {} of fuel is required to satisfy the tirany of the rocket equation", tiranyFuel);
-    println!("The total ammount of fuel required is {}", result);
+    let fuel = fuel_requirement(raw_input);
+    
+    println!("The total ammount of fuel required is {}", fuel);
 }
 
-fn module_requirement(raw_input: String) -> f32 {
+fn fuel_requirement(raw_input: String) -> f32 {
  let modules: Vec<&str> = raw_input.split("\n").collect();
  let mut total: f32 = 0.0;
 
  for module in &modules {
+     let mut module_total = 0.0;
      let parsed: f32 = module.parse().unwrap();
      let divided: f32 = parsed / 3.0;
      let rounded: f32 = divided.floor();
-     total += rounded - 2.0;
+     module_total += rounded - 2.0;
+     module_total = add_tirany_requirement(module_total);
+     total += module_total;
  }
 
- total
+ return total
 }
 
-fn rocketEquationFuel(moduleFuel: f32) -> f32 {
-    let mut nextStepRequired: bool = true;
-    let mut fuel = (moduleFuel / 3.0) - 2.0;
-    let mut lastAdded = fuel;
+fn add_tirany_requirement(currentFuel: f32) -> f32 {
+   let mut total = currentFuel;
+   let mut newRequirement = (currentFuel / 3.0).floor() - 2.0;
 
-    while ((lastAdded / 3.0).floor() - 2.0) > 0.0 {
-        lastAdded = (lastAdded / 3.0).floor() - 2.0;
-        fuel += lastAdded;
-    }
+   while (newRequirement > 0.0) {
+       total += newRequirement;
+       println!("Added {}", newRequirement);
+       newRequirement = (newRequirement / 3.0).floor() - 2.0;
+   }
 
-    fuel
+   return total
 }
