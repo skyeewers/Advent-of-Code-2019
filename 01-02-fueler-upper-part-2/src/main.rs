@@ -27,7 +27,7 @@ fn solve(raw_input: String) {
 }
 
 fn fuel_requirement(raw_input: String) -> f32 {
- let modules: Vec<&str> = raw_input.split("\n").collect();
+ let modules: Vec<&str> = raw_input.split('\n').collect();
  let mut total: f32 = 0.0;
 
  for module in &modules {
@@ -40,18 +40,18 @@ fn fuel_requirement(raw_input: String) -> f32 {
      total += module_total;
  }
 
- return total
+ total
 }
 
-fn add_tirany_requirement(currentFuel: f32) -> f32 {
-   let mut total = currentFuel;
-   let mut newRequirement = (currentFuel / 3.0).floor() - 2.0;
+fn add_tirany_requirement(current_fuel: f32) -> f32 {
+   let mut total = current_fuel;
+   let mut new_requirement = (current_fuel / 3.0).floor() - 2.0;
 
-   while (newRequirement > 0.0) {
-       total += newRequirement;
-       println!("Added {}", newRequirement);
-       newRequirement = (newRequirement / 3.0).floor() - 2.0;
+   while new_requirement > 0.0 {
+       total += new_requirement;
+       println!("Added {}", new_requirement);
+       new_requirement = (new_requirement / 3.0).floor() - 2.0;
    }
 
-   return total
+   total
 }
