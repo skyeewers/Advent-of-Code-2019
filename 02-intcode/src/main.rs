@@ -21,7 +21,7 @@ fn main() {
 }
 
 fn solve(input: String) {
-    let mut ints = parseInput(input);
+    let mut ints = parse_input(input);
     let mut pos: i32 = 0;
     let mut cont = true;
 
@@ -56,7 +56,7 @@ fn solve(input: String) {
     }
 }
 
-fn parseInput(input: String) -> Vec<i32> {
+fn parse_input(input: String) -> Vec<i32> {
     let mut ints: Vec<i32> = Vec::new();
 
     for part in input.split(',') {
