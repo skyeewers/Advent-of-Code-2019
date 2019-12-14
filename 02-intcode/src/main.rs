@@ -38,10 +38,7 @@ fn solve(input: String) {
             2 => ints[output_location] = input1 * input2,
 
             _ => {
-                println!("Encountered end");
-                println!("Complete content:");
-                debug_output(&ints);
-                println!("Value at pos 0 is: {}", ints[0].to_string());
+                println!("Encountered end opcode");
                 cont = false;
             }
         }
@@ -49,11 +46,14 @@ fn solve(input: String) {
         pos += 4;
         if pos+3 > (ints.len() as i32) {
             cont = false;
-            println!("Complete content:");
-            debug_output(&ints);
         }
 
     }
+
+    println!("Complete ouput:");
+    debug_output(&ints);
+    println!("Value at pos 0 is: {}", ints[0].to_string());
+               
 }
 
 fn parse_input(input: String) -> Vec<i32> {
@@ -72,7 +72,7 @@ fn debug_output(output: &Vec<i32>) {
         for integer in row {
             print!("{} ", integer);
         }
-        // println!(" ");
+        println!(" ");
     }
     println!(" ");
 }
